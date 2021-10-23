@@ -1,0 +1,54 @@
+create table if not exists genre (
+ id serial primary key,
+ title_genre varchar(100),
+ description varchar(100)
+);
+
+create table if not exists performers (
+ id serial primary key,
+ name_performers varchar(100),
+ description varchar(100)
+);
+
+create table if not exists performers_ganre (
+	performers_id integer references performers(id),
+	genre_id integer references genre(id)
+);
+
+create table if not exists albums (
+ 	id serial primary key,
+ 	title_albums varchar(100),
+ 	year_of_release integer
+);
+
+create table if not exists performers_albums (
+	performers_id integer references performers(id),
+	albums_id integer references albums(id)
+);
+
+create table if not exists tracks (
+ id serial primary key,
+ track_name varchar(100),
+ duration integer,
+ albums_id integer references albums(id)
+);
+
+create table if not exists collection (
+	id serial primary key,
+	title_collection varchar(100),
+	year_of_release integer 
+);
+
+create table if not exists collection_track (
+	collection_id integer references collection(id),
+	tracks_id integer references tracks(id)
+);
+
+alter table collection
+	add constraint collection_year_of_release_check check(year_of_release > 0);
+
+alter table tracks
+	add constraint duration_check check(duration > 0);
+
+alter table albums
+	add constraint albums_year_of_release_check check(year_of_release > 0);
