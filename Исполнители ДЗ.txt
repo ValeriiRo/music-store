@@ -1,13 +1,13 @@
 create table if not exists genre (
  id serial primary key,
  title_genre varchar(100),
- description varchar(100)
+ description varchar(1000)
 );
 
 create table if not exists performers (
  id serial primary key,
  name_performers varchar(100),
- description varchar(100)
+ description varchar(1000)
 );
 
 create table if not exists performers_ganre (
